@@ -1,0 +1,19 @@
+import com.sap.gateway.ip.core.customdev.util.Message;
+
+def Message processData(Message message) {
+ 
+    def body = message.getBody(String.class)
+    def log = message.getProperty("b1")
+   def timestamp = java.time.LocalDateTime.now()
+
+    message.setProperty(
+        "b1",
+        log + " -> " + "Branch 1"
+    )
+ 
+    body = body + "\n\nBranch 1 Executed"
+    body = body + "\n\nBranch 1 Executed at : " + timestamp
+    
+    message.setBody(body)
+    return message;
+}
